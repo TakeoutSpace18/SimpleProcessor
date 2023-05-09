@@ -1,0 +1,35 @@
+//r1 - первое число, r2 - второе число, r3 - остаток, r4 - маркер, r5 - для констант
+//r6 - ответ
+//
+//	load: load value from 11 in RAM to r1
+//	load: load value from 12 in RAM to r2
+//	load: load value from 13 in RAM to r5 //r5 = 0
+//
+//  mod: r3 = r1%r2
+//  copy: r6 = r2
+//  copy: copy r2 value to r1
+//  copy: copy r3 value to r2
+//
+//  sil: r4 = 1 if r5 < r3 else r4 = 0  //если остаток ненулевой r4 = 1
+//  br: jump to 4(mod) if r4 = 1       //идем снова брать остаток
+//
+//	store: store r6 value to 14
+//
+//
+// r1 000
+// r2 001
+// r3 010
+// r4 011
+// r5 100
+// r6 101
+
+01001 000 0000000000001011 00000000   //load: load value from 11 in RAM to r1
+01001 001 0000000000001100 00000000   //load: load value from 12 in RAM to r2
+01001 100 0000000000001101 00000000   //load: load value from 13 in RAM to r5
+00100 010 000 001 000000000000000000  //mod: r3 = r1%r2
+00111 101 001 000000000000000000000   //copy: r6 = r2
+00111 001 000 000000000000000000000   //copy: copy r2 value to r1
+00111 010 001 000000000000000000000   //copy: copy r3 value to r2
+00101 011 100 010 000000000000000000  //sil: r4 = 1 if r5 < r3 else r4 = 0
+01000 011 0000000000000100 00000000   //br: jump to mod if r4 = 1
+01010 101 0000000000001110 00000000   //store: store r6 value to 14
