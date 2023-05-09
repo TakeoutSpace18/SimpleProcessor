@@ -24,3 +24,4 @@ Syntax: ```opcode[5bit] | r1[3bit] | arg[16bit]```
 | br   | 7      | jump to \<arg\> if r1 == 1      |
 | load | 8      | load value from \<arg\> in RAM to r1|
 | store| 9      | store r1 value to \<arg\> in RAM|
+| set  | 10     | set r1 value to \<arg\>|
