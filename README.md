@@ -14,6 +14,7 @@ Syntax: ```opcode[5bit] | r1[3bit] | r2[3bit] | r3[3bit]```
 | mod  | 4      | r3 = r1 % r2                    |
 | sil  | 5      | r3 = 1 if r1 < r2, else r3 = 0  |
 | sie  | 6      | r3 = 1 if r1 == r2, else r3 = 0 |
+| copy | 7      | copy r2 value to r1             |
 
 
 ### Immediate type instructions ###
@@ -21,7 +22,7 @@ Syntax: ```opcode[5bit] | r1[3bit] | arg[16bit]```
 
 | name | opcode | description                     |
 |------|--------|---------------------------------|
-| br   | 7      | jump to \<arg\> if r1 == 1      |
-| load | 8      | load value from \<arg\> in RAM to r1|
-| store| 9      | store r1 value to \<arg\> in RAM|
-| set  | 10     | set r1 value to \<arg\>|
+| br   | 8      | jump to \<arg\> if r1 == 1      |
+| load | 9      | load value from \<arg\> in RAM to r1|
+| store| 10     | store r1 value to \<arg\> in RAM|
+| set  | 11     | set r1 value to \<arg\>|
