@@ -22,7 +22,7 @@ Syntax: ```opcode[5bit] | r1[3bit] | arg[16bit]```
 
 | name | opcode | description                     |
 |------|--------|---------------------------------|
-| br   | 8      | jump to \<arg\> if r1 == 1      |
+| jmp  | 8      | jump to \<arg\> if r1 == 1      |
 | load | 9      | load value from \<arg\> in RAM to r1|
 | store| 10     | store r1 value to \<arg\> in RAM|
 | set  | 11     | set r1 value to \<arg\>|

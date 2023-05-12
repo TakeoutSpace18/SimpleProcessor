@@ -7,9 +7,9 @@
     sil                  res = (a < b) ? 16'b1 : 16'b0 
     sie                  res = (a == b) ?  16'b1 : 16'b0
 */
-module alu(
+module ALU(
     input [31:0] a,b,
-    input [2:0] Op,
+    input [2:0] op,
     output [31:0] res,
     logic [31:0] reg1,reg2,
     logic [31:0] reg3
@@ -19,8 +19,8 @@ module alu(
     assign reg2 = b;
     assign res = reg3;
     
-    always @(Op or reg1 or reg2) begin
-        case(Op)
+    always @(op or reg1 or reg2) begin
+        case(op)
         0: reg3 = reg1 + reg2; //addition 
         1: reg3 = reg1 - reg2;  //substraction 
         2: reg3 = reg1 / reg2;  //division 

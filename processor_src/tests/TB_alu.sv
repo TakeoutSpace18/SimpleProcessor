@@ -4,7 +4,7 @@ module TB_alu();
     logic [2:0] Op;
     logic [15:0] res;
     
-    alu DUT(.a(a), .b(b), .Op(Op), .res(res));
+    ALU DUT(.a(a), .b(b), .op(Op), .res(res));
     initial begin
         a = 16'b0000000001101010;
         b = 16'b0000000000111011;

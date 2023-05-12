@@ -16,7 +16,7 @@ reg [31:0] memory [255:0];
 assign o_data = memory[i_addr];
 
 initial begin
-    $readmemh("memory.mem", memory, 0, 255);
+    $readmemb("gcd_euklidean_algorithm.mem", memory, 0, 255);
 end
 
 always_ff @( posedge i_clk ) begin
