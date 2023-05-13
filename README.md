@@ -1,9 +1,9 @@
 # SimpleProcessor
 
 ## Specifications ##
-Word size: 32 bit
-Memory address width: 16 bit
-8 registers
+Word size: 32 bit  
+Memory address width: 16 bit  
+8 registers  
 
 ## ISA ##
 
