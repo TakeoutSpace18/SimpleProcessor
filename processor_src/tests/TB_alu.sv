@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module TB_alu();
     logic [15:0] a;
     logic [15:0] b;
