@@ -1,5 +1,10 @@
 # SimpleProcessor
 
+## Specifications ##
+Word size: 32 bit
+Memory address width: 16 bit
+8 registers
+
 ## ISA ##
 
 ### Register type instructions ###
@@ -25,4 +30,5 @@ Syntax: ```opcode[5bit] | r1[3bit] | arg[16bit]```
 | jmp  | 8      | jump to \<arg\> if r1 == 1      |
 | load | 9      | load value from \<arg\> in RAM to r1|
 | store| 10     | store r1 value to \<arg\> in RAM|
-| set  | 11     | set r1 value to \<arg\>|
+| set  | 11     | set r1 value to \<arg\>         |
+| halt | 12     | do nothing                      |

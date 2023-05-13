@@ -11,6 +11,8 @@ parameter jmp    = 5'b01000;
 parameter load   = 5'b01001;
 parameter store  = 5'b01010;
 parameter set    = 5'b01011;
+parameter halt   = 5'b01100;
+
 // ===========================
 
 module Processor(
@@ -18,7 +20,7 @@ module Processor(
     input i_reset
 );
 
-// Registers
+// 8 Registers
 reg [31:0] registers [7:0];
 
 // RAM
@@ -33,18 +35,15 @@ RAM ram(.i_clk(i_clk), .i_data(ram_i_data), .o_data(ram_o_data), .i_set(ram_set_
 reg [31:0] alu_operand_a;
 reg [31:0] alu_operand_b;
 wire [31:0] alu_result;
-wire [2:0] alu_opcode;
 
 ALU alu(.a(alu_operand_a), .b(alu_operand_b), .op(opcode), .res(alu_result));
 
 // FSM states
 enum logic [3:0] {
     instr_read,
-    instr_decode,
+    instr_execute,
     alu_load_operands,
     alu_get_result,
-    load_operation,
-    store_operation,
     instr_next
 } state;
 
@@ -79,10 +78,10 @@ always @(posedge i_clk) begin
     case (state)
         instr_read: begin
             instruction <= ram_o_data;
-            state <= instr_decode;
+            state <= instr_execute;
         end
         
-        instr_decode: begin
+        instr_execute: begin
             case (opcode)
                 add: state <= alu_load_operands;
                 sub: state <= alu_load_operands;
@@ -91,27 +90,34 @@ always @(posedge i_clk) begin
                 mod: state <= alu_load_operands;
                 sil: state <= alu_load_operands;
                 sie: state <= alu_load_operands;
+                
                 copy: begin
                     registers[r1] <= registers[r2];
                     state <= instr_next;
                 end
+                
                 jmp: begin
                     jmp_flag <= registers[r1][0];
                     state <= instr_next;
                 end
+                
                 load: begin
                     registers[r1] <= ram_o_data;
                     state <= instr_next;
                 end
+                
                 store: begin 
                     ram_i_data <= registers[r1];
                     ram_set_flag <= 1'b1;
                     state <= instr_next;
                 end
+                
                 set: begin
                     registers[r1] <= {16'h0000, arg};
                     state <= instr_next;
                 end
+                
+                halt: state <= instr_next;
             endcase
         end
         
